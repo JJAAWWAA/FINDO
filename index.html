@@ -1,0 +1,2159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Findo - Your Best Bet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;600;700&family=General+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8B1818;
+            --primary-dark: #6B0F0F;
+            --secondary: #2C1810;
+            --accent: #D94545;
+            --bg: #FFFEF7;
+            --surface: #FFFFFF;
+            --text: #1A1A1A;
+            --text-muted: #6B6B6B;
+            --border: #E8E8E8;
+            --success: #06D6A0;
+            --warning: #F59E0B;
+            --shadow: rgba(0, 0, 0, 0.08);
+            --bronze: #CD7F32;
+            --silver: #C0C0C0;
+            --gold: #FFD700;
+            --platinum: #E5E4E2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'General Sans', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: var(--surface);
+            border-bottom: 2px solid var(--border);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            gap: 0.2rem;
+            cursor: pointer;
+            min-width: 120px;
+        }
+
+        .logo-main {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 0.1em;
+        }
+
+        .logo-tagline {
+            font-family: 'General Sans', sans-serif;
+            font-size: 0.75rem;
+            color: var(--primary);
+            letter-spacing: 0.2em;
+            font-weight: 500;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.9rem 3.5rem 0.9rem 1.2rem;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-family: 'General Sans', sans-serif;
+            transition: all 0.3s ease;
+            background: var(--bg);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(139, 24, 24, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 0.4rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .search-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .search-filters {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 0.5rem;
+            display: none;
+            box-shadow: 0 8px 24px var(--shadow);
+            z-index: 100;
+        }
+
+        .search-filters.active {
+            display: block;
+        }
+
+        .filter-group {
+            margin-bottom: 1rem;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .filter-select, .filter-input {
+            width: 100%;
+            padding: 0.6rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: 'General Sans', sans-serif;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-btn {
+            position: relative;
+            padding: 0.7rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            color: var(--text);
+        }
+
+        .nav-btn:hover {
+            background: var(--bg);
+        }
+
+        .nav-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'General Sans', sans-serif;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: var(--surface);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px var(--shadow);
+            border-color: var(--primary);
+        }
+
+        .seller-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .badge-bronze { background: var(--bronze); }
+        .badge-silver { background: var(--silver); color: var(--text); }
+        .badge-gold { background: var(--gold); color: var(--text); }
+        .badge-platinum { background: var(--platinum); color: var(--text); }
+
+        .product-image {
+            width: 100%;
+            height: 240px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .store-name {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+
+        .store-name:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .price-section {
+            margin-bottom: 1rem;
+        }
+
+        .current-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Clash Display', sans-serif;
+        }
+
+        .stock-info {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .btn-buy {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.9rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-buy:hover {
+            background: var(--primary-dark);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Messages Page */
+        .messages-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            height: 600px;
+        }
+
+        .conversations-list {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            overflow-y: auto;
+        }
+
+        .conversation-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .conversation-item:hover {
+            background: var(--bg);
+        }
+
+        .conversation-item.active {
+            background: var(--bg);
+            border-left: 4px solid var(--primary);
+        }
+
+        .conversation-item.unread {
+            background: rgba(139, 24, 24, 0.05);
+            font-weight: 700;
+        }
+
+        .chat-window {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            padding: 1.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            max-width: 70%;
+        }
+
+        .message.sent {
+            margin-left: auto;
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            border-radius: 16px 16px 0 16px;
+        }
+
+        .message.received {
+            background: var(--bg);
+            padding: 1rem;
+            border-radius: 16px 16px 16px 0;
+        }
+
+        .chat-input-container {
+            padding: 1.5rem;
+            border-top: 2px solid var(--border);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            font-family: 'General Sans', sans-serif;
+        }
+
+        .btn-sold {
+            background: var(--success);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        /* Account Page */
+        .account-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+        }
+
+        .account-sidebar {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .account-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            margin: 0 auto 1rem;
+        }
+
+        .account-score {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .score-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Clash Display', sans-serif;
+        }
+
+        .score-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .achievement-card {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .achievement-card.locked {
+            opacity: 0.4;
+            filter: grayscale(100%);
+        }
+
+        .achievement-card:not(.locked):hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+        }
+
+        .achievement-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .achievement-points {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--surface);
+            border-radius: 20px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: 'General Sans', sans-serif;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .notification {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: var(--success);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            display: none;
+        }
+
+        .notification.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+            
+            .messages-container, .account-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo" onclick="showPage('home')">
+                <div class="logo-main">FINDO</div>
+                <div class="logo-tagline">YOUR BEST BET</div>
+            </div>
+
+            <div class="search-bar">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search for products...">
+                    <button class="search-btn" onclick="performSearch()">Search</button>
+                    <button onclick="toggleFilters()" style="position: absolute; right: 6rem; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 1.5rem; cursor: pointer;">⚙️</button>
+                    
+                    <div class="search-filters" id="searchFilters">
+                        <div class="filter-group">
+                            <label class="filter-label">Category</label>
+                            <select class="filter-select" id="filterCategory">
+                                <option value="">All Categories</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="clothing">Clothing</option>
+                                <option value="home">Home & Garden</option>
+                                <option value="toys">Toys & Games</option>
+                                <option value="sports">Sports & Outdoors</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label class="filter-label">Price Range</label>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                                <input type="number" class="filter-input" id="filterMinPrice" placeholder="Min $">
+                                <input type="number" class="filter-input" id="filterMaxPrice" placeholder="Max $">
+                            </div>
+                        </div>
+                        <button class="btn-primary" onclick="performSearch()" style="width: 100%; margin-top: 0.5rem;">Apply Filters</button>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="nav-actions" id="navActions">
+                <button class="nav-btn" onclick="showPage('recommended')">🔥 Recommended</button>
+                <button class="nav-btn" onclick="showPage('messages')">
+                    💬 Messages
+                    <span class="badge" id="messagesBadge" style="display: none;">0</span>
+                </button>
+                <button class="nav-btn" onclick="showPage('mystore')">🏪 My Store</button>
+                <button class="nav-btn" onclick="showPage('account')">👤 Account</button>
+                <button class="btn-primary" onclick="showSignup()">Sign Up</button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="heroSection">
+        <h1>Find Your Best Bet</h1>
+        <p>Search stores, compare prices, and connect directly with sellers.</p>
+    </section>
+
+    <main class="container">
+        <!-- Home Page -->
+        <div id="homePage">
+            <div class="products-grid" id="productsGrid">
+                <div class="empty-state">
+                    <div class="empty-icon">🏪</div>
+                    <h2>No Products Yet</h2>
+                    <p>Start adding products to your store!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommended Page -->
+        <div id="recommendedPage" style="display: none;">
+            <h1 class="section-title">🔥 Recommended For You</h1>
+            <div class="products-grid" id="recommendedGrid"></div>
+        </div>
+
+        <!-- Messages Page -->
+        <div id="messagesPage" style="display: none;">
+            <h1 class="section-title">💬 Messages</h1>
+            <div class="messages-container">
+                <div class="conversations-list" id="conversationsList">
+                    <div class="empty-state">
+                        <p>No messages yet</p>
+                    </div>
+                </div>
+                <div class="chat-window" id="chatWindow">
+                    <div class="empty-state">
+                        <p>Select a conversation to start chatting</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Store Page -->
+        <div id="myStorePage" style="display: none;">
+            <div class="section-header">
+                <h1 class="section-title">📦 My Store</h1>
+                <button class="btn-primary" onclick="showAddProduct()">+ Add Product</button>
+            </div>
+            <div class="products-grid" id="myProductsGrid">
+                <div class="empty-state">
+                    <p>No products yet. Add your first product!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Account Page -->
+        <div id="accountPage" style="display: none;">
+            <h1 class="section-title">👤 Your Account</h1>
+            <div class="account-container">
+                <div class="account-sidebar">
+                    <div class="account-avatar" id="accountAvatar">U</div>
+                    <div class="account-score">
+                        <div class="score-value" id="accountScore">0</div>
+                        <div class="score-label">Total Points</div>
+                    </div>
+                    <button class="btn-primary" onclick="logout()" style="width: 100%;">🚪 Logout</button>
+                </div>
+                <div>
+                    <h2 style="margin-bottom: 1rem;">🏆 Achievements</h2>
+                    <div class="achievements-grid" id="achievementsGrid"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    
+    <!-- Sign Up Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('signupModal')">×</button>
+            <h2 class="section-title">Sign Up for Findo</h2>
+            <form id="signupForm" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">I am a:</label>
+                    <select class="form-select" name="userType" required>
+                        <option value="buyer">Buyer</option>
+                        <option value="seller">Store Owner/Seller</option>
+                        <option value="both">Both</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div class="modal" id="addProductModal">
+        <div class="modal-content" style="max-width: 700px;">
+            <button class="modal-close" onclick="closeModal('addProductModal')">×</button>
+            <h2 class="section-title">Add New Product</h2>
+            <form id="addProductForm" onsubmit="submitProduct(event)">
+                <div class="form-group">
+                    <label class="form-label">Product Images (up to 5)</label>
+                    <input type="file" accept="image/*" multiple onchange="handleImageSelect(event)" style="width: 100%; padding: 0.8rem; border: 2px solid var(--border); border-radius: 8px;">
+                    <div id="imagePreviewGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 1rem; margin-top: 1rem;"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Product Name</label>
+                    <input type="text" class="form-input" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-textarea" name="description" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Category</label>
+                    <select class="form-select" name="category" required>
+                        <option value="">Select...</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="home">Home & Garden</option>
+                        <option value="toys">Toys & Games</option>
+                        <option value="sports">Sports & Outdoors</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label">Price ($)</label>
+                        <input type="number" step="0.01" class="form-input" name="price" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Stock Quantity</label>
+                        <input type="number" class="form-input" name="stock" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Sale Price (Optional)</label>
+                    <input type="number" step="0.01" class="form-input" name="salePrice">
+                </div>
+                
+                <button type="submit" class="btn-primary" style="width: 100%;">Add Product</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contact Seller Modal -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('contactModal')">×</button>
+            <h2 class="section-title">Contact Seller</h2>
+            
+            <div style="background: var(--bg); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                <strong id="contactProductName">Product Name</strong>
+                <div style="color: var(--primary); font-weight: 700; margin-top: 0.3rem;" id="contactProductPrice">$0.00</div>
+                <div style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.3rem;">
+                    Store: <span id="contactStoreName">Store Name</span>
+                </div>
+            </div>
+            
+            <form onsubmit="sendMessage(event)">
+                <div class="form-group">
+                    <label class="form-label">Your Message</label>
+                    <textarea class="form-textarea" required placeholder="Hi, I'm interested in this product..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div class="modal" id="reviewModal">
+        <div class="modal-content" style="max-width: 700px;">
+            <button class="modal-close" onclick="closeModal('reviewModal')">×</button>
+            <h2 class="section-title">Review Your Purchase</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                Store: <strong id="reviewStoreName">Store Name</strong>
+            </p>
+            
+            <form onsubmit="submitReview(event)">
+                <div class="form-group">
+                    <label class="form-label">1. Did the item match the description? (1-5 stars)</label>
+                    <select class="form-select" name="productMatch" required>
+                        <option value="">Select...</option>
+                        <option value="1">⭐ 1 - Not at all</option>
+                        <option value="2">⭐⭐ 2 - Poor</option>
+                        <option value="3">⭐⭐⭐ 3 - Okay</option>
+                        <option value="4">⭐⭐⭐⭐ 4 - Good</option>
+                        <option value="5">⭐⭐⭐⭐⭐ 5 - Perfect</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">2. How's the product quality? (1-5 stars)</label>
+                    <select class="form-select" name="quality" required>
+                        <option value="">Select...</option>
+                        <option value="1">⭐ 1 - Poor</option>
+                        <option value="2">⭐⭐ 2 - Below Average</option>
+                        <option value="3">⭐⭐⭐ 3 - Average</option>
+                        <option value="4">⭐⭐⭐⭐ 4 - Good</option>
+                        <option value="5">⭐⭐⭐⭐⭐ 5 - Excellent</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">3. How responsive was the seller? (1-5 stars)</label>
+                    <select class="form-select" name="communication" required>
+                        <option value="">Select...</option>
+                        <option value="1">⭐ 1 - Very Slow</option>
+                        <option value="2">⭐⭐ 2 - Slow</option>
+                        <option value="3">⭐⭐⭐ 3 - Average</option>
+                        <option value="4">⭐⭐⭐⭐ 4 - Fast</option>
+                        <option value="5">⭐⭐⭐⭐⭐ 5 - Very Fast</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">4. How fast did you receive it? (1-5 stars)</label>
+                    <select class="form-select" name="shipping" required>
+                        <option value="">Select...</option>
+                        <option value="1">⭐ 1 - Very Slow</option>
+                        <option value="2">⭐⭐ 2 - Slow</option>
+                        <option value="3">⭐⭐⭐ 3 - On Time</option>
+                        <option value="4">⭐⭐⭐⭐ 4 - Fast</option>
+                        <option value="5">⭐⭐⭐⭐⭐ 5 - Very Fast</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">5. Was it packaged well? (1-5 stars)</label>
+                    <select class="form-select" name="packaging" required>
+                        <option value="">Select...</option>
+                        <option value="1">⭐ 1 - Poor</option>
+                        <option value="2">⭐⭐ 2 - Below Average</option>
+                        <option value="3">⭐⭐⭐ 3 - Good</option>
+                        <option value="4">⭐⭐⭐⭐ 4 - Very Good</option>
+                        <option value="5">⭐⭐⭐⭐⭐ 5 - Excellent</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">6. Was the seller honest? (1-5 stars)</label>
+                    <select class="form-select" name="honesty" required>
+                        <option value="">Select...</option>
+                        <option value="1">⭐ 1 - Not Honest</option>
+                        <option value="2">⭐⭐ 2 - Somewhat</option>
+                        <option value="3">⭐⭐⭐ 3 - Honest</option>
+                        <option value="4">⭐⭐⭐⭐ 4 - Very Honest</option>
+                        <option value="5">⭐⭐⭐⭐⭐ 5 - Completely Honest</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">7. Would you buy from this seller again?</label>
+                    <select class="form-select" name="buyAgain" required>
+                        <option value="">Select...</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">8. Would you recommend this seller?</label>
+                    <select class="form-select" name="recommend" required>
+                        <option value="">Select...</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">9. Additional Comments</label>
+                    <textarea class="form-textarea" name="comments" placeholder="Share your experience..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn-primary" style="width: 100%;">Submit Review</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal" id="productDetailModal">
+        <div class="modal-content" style="max-width: 800px;">
+            <button class="modal-close" onclick="closeModal('productDetailModal')">×</button>
+            <div id="productDetailImages" style="margin-bottom: 1.5rem;"></div>
+            <h2 class="section-title" id="productDetailName">Product Name</h2>
+            <div style="font-size: 2rem; font-weight: 700; color: var(--primary); margin-bottom: 1rem;" id="productDetailPrice">$0.00</div>
+            <div style="margin-bottom: 1rem;">
+                <strong>Store:</strong> <span id="productDetailStore" style="cursor: pointer; color: var(--primary);">Store Name</span>
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <strong>Availability:</strong> <span id="productDetailStock">0 in stock</span>
+            </div>
+            <div style="margin-bottom: 2rem;">
+                <strong>Description:</strong>
+                <p id="productDetailDescription" style="color: var(--text-muted); margin-top: 0.5rem;">Description here</p>
+            </div>
+            <button class="btn-primary" onclick="closeModal('productDetailModal'); contactSeller(localStorage.getItem('findo_current_product_id'));" style="width: 100%;">
+                Contact Seller
+            </button>
+        </div>
+    </div>
+
+    <!-- Report Modal -->
+    <div class="modal" id="reportModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('reportModal')">×</button>
+            <h2 class="section-title">Report Product</h2>
+            <p style="margin-bottom: 1rem;">Product: <strong id="reportProductName">Product Name</strong></p>
+            
+            <form onsubmit="submitReport(event)">
+                <input type="hidden" id="reportProductId" name="productId">
+                <input type="hidden" id="reportStoreId" name="storeId">
+                <input type="hidden" id="reportStoreName" name="storeName">
+                
+                <div class="form-group">
+                    <label class="form-label">Reason for Report</label>
+                    <select class="form-select" name="reportType" required>
+                        <option value="">Select reason...</option>
+                        <option value="inappropriate">Inappropriate Content</option>
+                        <option value="scam">Scam / Fraudulent Listing</option>
+                        <option value="counterfeit">Counterfeit Product</option>
+                        <option value="misleading">Misleading Information</option>
+                        <option value="price">Price Manipulation</option>
+                        <option value="prohibited">Prohibited Item</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Details</label>
+                    <textarea class="form-textarea" name="details" required placeholder="Please explain the issue in detail..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn-primary" style="width: 100%;">Submit Report</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Store Profile Modal -->
+    <div class="modal" id="storeProfileModal">
+        <div class="modal-content" style="max-width: 1000px;">
+            <button class="modal-close" onclick="closeModal('storeProfileModal')">×</button>
+            <div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem;">
+                <div style="width: 100px; height: 100px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: white; font-weight: 700; position: relative;">
+                    S
+                    <div class="seller-badge" id="storeProfileBadge" style="position: absolute; bottom: -10px; right: -10px;">GOLD</div>
+                </div>
+                <div style="flex: 1;">
+                    <h1 class="section-title" id="storeProfileName">Store Name</h1>
+                    <div style="display: flex; gap: 2rem; margin-top: 1rem;">
+                        <div>
+                            <strong style="font-size: 1.5rem; color: var(--primary);" id="storeProfileProducts">0</strong>
+                            <div style="color: var(--text-muted); font-size: 0.9rem;">Products</div>
+                        </div>
+                        <div>
+                            <strong style="font-size: 1.5rem; color: var(--primary);" id="storeProfileSales">0</strong>
+                            <div style="color: var(--text-muted); font-size: 0.9rem;">Sales</div>
+                        </div>
+                        <div>
+                            <strong style="font-size: 1.5rem; color: var(--primary);" id="storeProfileRating">5.0</strong>
+                            <div style="color: var(--text-muted); font-size: 0.9rem;">Rating</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3 style="margin-bottom: 1rem;">Products from this store:</h3>
+            <div class="products-grid" id="storeProductsGrid"></div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script>
+        // Configuration
+        const API_URL = 'http://localhost:3000'; // Change to your Replit URL
+        
+        // State
+        let currentUser = null;
+        let currentPage = 'home';
+        let allProducts = [];
+        let userSearchHistory = [];
+        let userBrowsingHistory = [];
+
+        // Initialize
+        async function init() {
+            const storedUser = localStorage.getItem('findo_user');
+            if (storedUser) {
+                currentUser = JSON.parse(storedUser);
+                updateNavForLoggedInUser();
+            }
+            await loadProducts();
+            checkUnreadMessages();
+        }
+
+        function updateNavForLoggedInUser() {
+            const loginBtn = document.querySelector('.nav-actions .btn-primary');
+            loginBtn.textContent = '🚪 Logout';
+            loginBtn.onclick = logout;
+        }
+
+        // Navigation
+        function showPage(page) {
+            document.querySelectorAll('[id$="Page"]').forEach(p => p.style.display = 'none');
+            document.getElementById('heroSection').style.display = page === 'home' ? 'block' : 'none';
+            
+            currentPage = page;
+            
+            if (page === 'home') {
+                document.getElementById('homePage').style.display = 'block';
+                loadProducts();
+            } else if (page === 'recommended') {
+                document.getElementById('recommendedPage').style.display = 'block';
+                loadRecommended();
+            } else if (page === 'messages') {
+                if (!currentUser) {
+                    showNotification('Please sign up first!');
+                    showSignup();
+                    return;
+                }
+                document.getElementById('messagesPage').style.display = 'block';
+                loadMessages();
+            } else if (page === 'mystore') {
+                if (!currentUser) {
+                    showNotification('Please sign up first!');
+                    showSignup();
+                    return;
+                }
+                document.getElementById('myStorePage').style.display = 'block';
+                loadMyProducts();
+            } else if (page === 'account') {
+                if (!currentUser) {
+                    showNotification('Please sign up first!');
+                    showSignup();
+                    return;
+                }
+                document.getElementById('accountPage').style.display = 'block';
+                loadAccountData();
+            }
+        }
+
+        // Products
+        async function loadProducts() {
+            try {
+                // For now, use localStorage
+                allProducts = JSON.parse(localStorage.getItem('findo_products') || '[]');
+                displayProducts(allProducts, 'productsGrid');
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
+        }
+
+        function displayProducts(products, gridId) {
+            const grid = document.getElementById(gridId);
+            if (!products || products.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">🏪</div>
+                        <h2>No Products Yet</h2>
+                        <p>Be the first to add products!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Check if this is My Store view
+            const isMyStore = gridId === 'myProductsGrid';
+            const store = JSON.parse(localStorage.getItem('findo_current_store') || '{}');
+            const myStoreId = store.id;
+
+            grid.innerHTML = products.map(product => `
+                <div class="product-card" onclick="viewProduct('${product.id}')">
+                    <div class="product-image">
+                        ${product.images && product.images.length > 0 ? 
+                            `<img src="${product.images[0]}" alt="${product.name}">` : 
+                            '📦'}
+                        ${product.sellerBadge ? `<div class="seller-badge badge-${product.sellerBadge}">${product.sellerBadge.toUpperCase()}</div>` : ''}
+                        ${product.soldOut ? '<div class="deal-badge" style="background: var(--text-muted);">SOLD OUT</div>' : ''}
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">${product.name}</div>
+                        <div class="store-name" onclick="event.stopPropagation(); viewStore('${product.storeId}')">
+                            🏪 ${product.storeName}
+                        </div>
+                        <div class="price-section">
+                            <div class="current-price">$${(product.salePrice || product.price).toFixed(2)}</div>
+                        </div>
+                        ${product.stock !== undefined ? `<div class="stock-info">${product.stock} left in stock</div>` : ''}
+                        
+                        ${isMyStore && product.storeId === myStoreId ? `
+                            <!-- My Store Buttons -->
+                            <button class="btn-buy" onclick="event.stopPropagation(); quickSold('${product.id}')" style="background: var(--success); margin-top: 1rem;">
+                                ✓ SOLD
+                            </button>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.5rem;">
+                                <button class="btn-buy" onclick="event.stopPropagation(); editProduct('${product.id}')" style="background: var(--secondary); font-size: 0.85rem; padding: 0.6rem;">
+                                    ✏️ Edit
+                                </button>
+                                <button class="btn-buy" onclick="event.stopPropagation(); deleteProduct('${product.id}')" style="background: var(--accent); font-size: 0.85rem; padding: 0.6rem;">
+                                    🗑️ Delete
+                                </button>
+                            </div>
+                        ` : `
+                            <!-- Buyer Buttons -->
+                            <button class="btn-buy" onclick="event.stopPropagation(); contactSeller('${product.id}')">
+                                💬 Contact Seller
+                            </button>
+                            <button onclick="event.stopPropagation(); reportProduct('${product.id}')" style="background: var(--accent); color: white; border: none; padding: 0.5rem; border-radius: 6px; font-size: 0.85rem; cursor: pointer; margin-top: 0.5rem; width: 100%;">
+                                🚩 Report Product
+                            </button>
+                        `}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Quick SOLD from My Store
+        function quickSold(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) return;
+            
+            if (product.stock <= 0) {
+                showNotification('This product is out of stock!', 'error');
+                return;
+            }
+            
+            const quantity = parseInt(prompt(`How many units did you sell? (Available: ${product.stock})`, '1'));
+            
+            if (!quantity || quantity < 1) {
+                showNotification('Invalid quantity', 'error');
+                return;
+            }
+            
+            if (quantity > product.stock) {
+                showNotification(`You only have ${product.stock} in stock!`, 'error');
+                return;
+            }
+            
+            // Update product
+            const productIndex = allProducts.findIndex(p => p.id === productId);
+            allProducts[productIndex].stock -= quantity;
+            allProducts[productIndex].sales = (allProducts[productIndex].sales || 0) + quantity;
+            
+            if (allProducts[productIndex].stock <= 0) {
+                allProducts[productIndex].stock = 0;
+                allProducts[productIndex].soldOut = true;
+            }
+            
+            localStorage.setItem('findo_products', JSON.stringify(allProducts));
+            
+            showNotification(`✓ Sold ${quantity} unit(s)! Stock updated to ${allProducts[productIndex].stock}.`);
+            
+            // Check achievements
+            checkAndUnlockAchievements();
+            
+            // Reload My Store
+            loadMyProducts();
+        }
+
+        // Edit Product
+        function editProduct(productId) {
+            showNotification('Edit feature coming soon! For now, delete and re-add the product.');
+        }
+
+        // Delete Product
+        function deleteProduct(productId) {
+            if (!confirm('Delete this product? This cannot be undone.')) return;
+            
+            const productIndex = allProducts.findIndex(p => p.id === productId);
+            if (productIndex === -1) return;
+            
+            const productName = allProducts[productIndex].name;
+            allProducts.splice(productIndex, 1);
+            localStorage.setItem('findo_products', JSON.stringify(allProducts));
+            
+            showNotification(`"${productName}" deleted successfully`);
+            loadMyProducts();
+        }
+
+        // Report Product
+        function reportProduct(productId) {
+            if (!currentUser) {
+                showNotification('Please sign up to report products');
+                showSignup();
+                return;
+            }
+            
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) return;
+            
+            document.getElementById('reportProductName').textContent = product.name;
+            document.getElementById('reportProductId').value = productId;
+            document.getElementById('reportStoreId').value = product.storeId;
+            document.getElementById('reportStoreName').value = product.storeName;
+            
+            document.getElementById('reportModal').classList.add('active');
+        }
+
+        // Submit Report
+        function submitReport(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            
+            const report = {
+                id: Date.now().toString(),
+                productId: formData.get('productId'),
+                productName: document.getElementById('reportProductName').textContent,
+                storeId: formData.get('storeId'),
+                storeName: formData.get('storeName'),
+                reportType: formData.get('reportType'),
+                details: formData.get('details'),
+                reporterName: currentUser.name,
+                reporterId: currentUser.id,
+                timestamp: new Date().toISOString(),
+                status: 'pending'
+            };
+            
+            const reports = JSON.parse(localStorage.getItem('findo_reports') || '[]');
+            reports.push(report);
+            localStorage.setItem('findo_reports', JSON.stringify(reports));
+            
+            showNotification('Report submitted. Admin will review it.');
+            closeModal('reportModal');
+            e.target.reset();
+        }
+
+        // Search
+        function toggleFilters() {
+            document.getElementById('searchFilters').classList.toggle('active');
+        }
+
+        async function performSearch() {
+            const query = document.getElementById('searchInput').value;
+            const category = document.getElementById('filterCategory').value;
+            const minPrice = document.getElementById('filterMinPrice').value;
+            const maxPrice = document.getElementById('filterMaxPrice').value;
+
+            // Track search
+            if (query && currentUser) {
+                userSearchHistory.push(query);
+                localStorage.setItem('findo_search_history', JSON.stringify(userSearchHistory));
+            }
+
+            let filtered = [...allProducts];
+            
+            if (query) {
+                const q = query.toLowerCase();
+                filtered = filtered.filter(p => 
+                    p.name.toLowerCase().includes(q) ||
+                    p.description.toLowerCase().includes(q) ||
+                    p.storeName.toLowerCase().includes(q) ||
+                    p.category.toLowerCase().includes(q)
+                );
+            }
+            
+            if (category) {
+                filtered = filtered.filter(p => p.category === category);
+            }
+            
+            if (minPrice) {
+                filtered = filtered.filter(p => (p.salePrice || p.price) >= parseFloat(minPrice));
+            }
+            
+            if (maxPrice) {
+                filtered = filtered.filter(p => (p.salePrice || p.price) <= parseFloat(maxPrice));
+            }
+
+            displayProducts(filtered, 'productsGrid');
+            document.getElementById('searchFilters').classList.remove('active');
+            showNotification(`Found ${filtered.length} products`);
+        }
+
+        // Messages
+        async function checkUnreadMessages() {
+            if (!currentUser) return;
+            
+            const messages = JSON.parse(localStorage.getItem('findo_messages') || '[]');
+            const unread = messages.filter(m => 
+                m.sellerId === currentUser.id && !m.read
+            ).length;
+            
+            const badge = document.getElementById('messagesBadge');
+            if (unread > 0) {
+                badge.textContent = unread;
+                badge.style.display = 'flex';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        async function loadMessages() {
+            // Load conversations
+            const messages = JSON.parse(localStorage.getItem('findo_messages') || '[]');
+            const myMessages = messages.filter(m => 
+                m.sellerId === currentUser.id || m.buyerId === currentUser.id
+            );
+            
+            // Group by conversation
+            const conversations = {};
+            myMessages.forEach(msg => {
+                const otherId = msg.sellerId === currentUser.id ? msg.buyerId : msg.sellerId;
+                if (!conversations[otherId]) {
+                    conversations[otherId] = [];
+                }
+                conversations[otherId].push(msg);
+            });
+            
+            const list = document.getElementById('conversationsList');
+            list.innerHTML = Object.keys(conversations).map(otherId => {
+                const msgs = conversations[otherId];
+                const lastMsg = msgs[msgs.length - 1];
+                const unread = msgs.some(m => !m.read && m.sellerId === currentUser.id);
+                
+                return `
+                    <div class="conversation-item ${unread ? 'unread' : ''}" onclick="openConversation('${otherId}')">
+                        <strong>${lastMsg.buyerName || lastMsg.sellerName}</strong>
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.3rem;">
+                            ${lastMsg.message.substring(0, 50)}...
+                        </div>
+                    </div>
+                `;
+            }).join('') || '<div class="empty-state"><p>No messages yet</p></div>';
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('findo_user');
+                localStorage.removeItem('findo_current_store');
+                currentUser = null;
+                location.reload();
+            }
+        }
+
+        // Modals
+        function showSignup() {
+            document.getElementById('signupModal').classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        async function handleSignup(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            
+            currentUser = {
+                id: Date.now().toString(),
+                name: formData.get('name'),
+                email: formData.get('email'),
+                userType: formData.get('userType'),
+                score: 0,
+                achievements: [],
+                createdAt: new Date().toISOString()
+            };
+            
+            localStorage.setItem('findo_user', JSON.stringify(currentUser));
+            
+            if (currentUser.userType === 'seller' || currentUser.userType === 'both') {
+                // Create store
+                const store = {
+                    id: Date.now().toString(),
+                    name: currentUser.name + "'s Store",
+                    ownerId: currentUser.id,
+                    email: currentUser.email,
+                    createdAt: new Date().toISOString()
+                };
+                localStorage.setItem('findo_current_store', JSON.stringify(store));
+            }
+            
+            showNotification(`Welcome, ${currentUser.name}!`);
+            closeModal('signupModal');
+            updateNavForLoggedInUser();
+        }
+
+        // Notifications
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = 'notification show';
+            
+            if (type === 'error') {
+                notification.style.background = 'var(--accent)';
+            } else {
+                notification.style.background = 'var(--success)';
+            }
+            
+            setTimeout(() => notification.classList.remove('show'), 3000);
+        }
+
+        // Recommended Products
+        function loadRecommended() {
+            const searchHistory = JSON.parse(localStorage.getItem('findo_search_history') || '[]');
+            const browsingHistory = JSON.parse(localStorage.getItem('findo_browsing_history') || '[]');
+            
+            let recommended = [];
+            
+            // Based on search history
+            if (searchHistory.length > 0) {
+                const recentSearches = searchHistory.slice(-3);
+                recommended = allProducts.filter(p => {
+                    return recentSearches.some(search => 
+                        p.name.toLowerCase().includes(search.toLowerCase()) ||
+                        p.category.toLowerCase().includes(search.toLowerCase())
+                    );
+                });
+            }
+            
+            // Based on browsing history
+            if (browsingHistory.length > 0) {
+                const categories = browsingHistory.map(p => p.category);
+                const mostBrowsed = categories.sort((a, b) => 
+                    categories.filter(v => v === a).length - categories.filter(v => v === b).length
+                ).pop();
+                
+                const categoryProducts = allProducts.filter(p => p.category === mostBrowsed);
+                recommended = [...recommended, ...categoryProducts];
+            }
+            
+            // Remove duplicates
+            recommended = [...new Map(recommended.map(p => [p.id, p])).values()];
+            
+            // If no history, show popular products
+            if (recommended.length === 0) {
+                recommended = allProducts.sort((a, b) => (b.views || 0) - (a.views || 0)).slice(0, 12);
+            }
+            
+            displayProducts(recommended.slice(0, 12), 'recommendedGrid');
+        }
+
+        // My Products
+        function loadMyProducts() {
+            const store = JSON.parse(localStorage.getItem('findo_current_store') || '{}');
+            if (!store.id) {
+                document.getElementById('myProductsGrid').innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">🏪</div>
+                        <h2>Create Your Store First</h2>
+                        <p>You need to create a store before adding products.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const products = allProducts.filter(p => p.storeId === store.id);
+            displayProducts(products, 'myProductsGrid');
+        }
+
+        // Account Data
+        function loadAccountData() {
+            document.getElementById('accountAvatar').textContent = currentUser.name.substring(0, 2).toUpperCase();
+            document.getElementById('accountScore').textContent = currentUser.score || 0;
+            
+            // Calculate user's achievements
+            const store = JSON.parse(localStorage.getItem('findo_current_store') || '{}');
+            const myProducts = allProducts.filter(p => p.storeId === store.id);
+            const totalSales = myProducts.reduce((sum, p) => sum + (p.sales || 0), 0);
+            const messages = JSON.parse(localStorage.getItem('findo_messages') || '[]');
+            const myMessages = messages.filter(m => m.sellerId === currentUser.id);
+            const reviews = JSON.parse(localStorage.getItem('findo_reviews') || '[]');
+            const myReviews = reviews.filter(r => r.storeId === store.id);
+            const avgRating = myReviews.length > 0 ? 
+                myReviews.reduce((sum, r) => sum + r.totalScore, 0) / myReviews.length / 10 : 5.0;
+            
+            const achievements = [
+                { 
+                    id: 'first_sale', 
+                    name: 'First Sale', 
+                    icon: '🎯', 
+                    points: 10, 
+                    unlocked: totalSales >= 1,
+                    desc: 'Sell your first item'
+                },
+                { 
+                    id: 'inventory_king', 
+                    name: 'Inventory King', 
+                    icon: '📦', 
+                    points: 25, 
+                    unlocked: myProducts.length >= 10,
+                    desc: 'Add 10+ products'
+                },
+                { 
+                    id: 'fast_responder', 
+                    name: 'Fast Responder', 
+                    icon: '⚡', 
+                    points: 15, 
+                    unlocked: myMessages.length >= 5,
+                    desc: 'Reply to 5 messages'
+                },
+                { 
+                    id: 'trusted_seller', 
+                    name: 'Trusted Seller', 
+                    icon: '💎', 
+                    points: 50, 
+                    unlocked: myReviews.length >= 10 && avgRating >= 4.5,
+                    desc: 'Get 10 reviews with 4.5+ rating'
+                },
+                { 
+                    id: 'top_seller', 
+                    name: 'Top Seller', 
+                    icon: '🏆', 
+                    points: 100, 
+                    unlocked: totalSales >= 50,
+                    desc: 'Sell 50+ items'
+                },
+                { 
+                    id: 'chatty', 
+                    name: 'Chatty', 
+                    icon: '💬', 
+                    points: 20, 
+                    unlocked: myMessages.length >= 100,
+                    desc: 'Send 100 messages'
+                },
+                { 
+                    id: 'photographer', 
+                    name: 'Photographer', 
+                    icon: '📸', 
+                    points: 15, 
+                    unlocked: myProducts.some(p => p.images && p.images.length >= 5),
+                    desc: 'Add product with 5 images'
+                },
+                { 
+                    id: 'perfect_rating', 
+                    name: 'Perfect Rating', 
+                    icon: '🌟', 
+                    points: 75, 
+                    unlocked: myReviews.length >= 20 && avgRating === 5.0,
+                    desc: 'Get 5.0 rating with 20+ reviews'
+                }
+            ];
+            
+            // Update user score
+            const unlockedPoints = achievements.filter(a => a.unlocked).reduce((sum, a) => sum + a.points, 0);
+            currentUser.score = unlockedPoints;
+            localStorage.setItem('findo_user', JSON.stringify(currentUser));
+            document.getElementById('accountScore').textContent = unlockedPoints;
+            
+            const grid = document.getElementById('achievementsGrid');
+            grid.innerHTML = achievements.map(ach => `
+                <div class="achievement-card ${ach.unlocked ? '' : 'locked'}" title="${ach.desc}">
+                    <div class="achievement-icon">${ach.icon}</div>
+                    <div class="achievement-name">${ach.name}</div>
+                    <div class="achievement-points">+${ach.points} pts</div>
+                    ${ach.unlocked ? '<div style="color: var(--success); font-size: 0.75rem; margin-top: 0.3rem;">✓ UNLOCKED</div>' : ''}
+                </div>
+            `).join('');
+        }
+
+        // Add Product
+        let selectedImages = [];
+        
+        function showAddProduct() {
+            const store = JSON.parse(localStorage.getItem('findo_current_store') || '{}');
+            if (!store.id) {
+                showNotification('Please create a store first!');
+                return;
+            }
+            
+            selectedImages = [];
+            document.getElementById('addProductModal').classList.add('active');
+        }
+
+        function handleImageSelect(e) {
+            const files = Array.from(e.target.files);
+            
+            if (selectedImages.length + files.length > 5) {
+                showNotification('Maximum 5 images allowed');
+                return;
+            }
+            
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    selectedImages.push(e.target.result);
+                    displayImagePreviews();
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function displayImagePreviews() {
+            const grid = document.getElementById('imagePreviewGrid');
+            grid.innerHTML = selectedImages.map((img, index) => `
+                <div style="position: relative; aspect-ratio: 1; border: 2px solid var(--border); border-radius: 8px; overflow: hidden;">
+                    <img src="${img}" style="width: 100%; height: 100%; object-fit: cover;">
+                    <button onclick="removeImage(${index})" style="position: absolute; top: 0.5rem; right: 0.5rem; background: var(--accent); color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-weight: 700;">×</button>
+                </div>
+            `).join('');
+        }
+
+        function removeImage(index) {
+            selectedImages.splice(index, 1);
+            displayImagePreviews();
+        }
+
+        async function submitProduct(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const store = JSON.parse(localStorage.getItem('findo_current_store'));
+            
+            const product = {
+                id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
+                storeId: store.id,
+                storeName: store.name,
+                sellerEmail: store.email,
+                name: formData.get('name'),
+                description: formData.get('description'),
+                price: parseFloat(formData.get('price')),
+                salePrice: formData.get('salePrice') ? parseFloat(formData.get('salePrice')) : null,
+                stock: parseInt(formData.get('stock')),
+                category: formData.get('category'),
+                images: selectedImages,
+                sales: 0,
+                views: 0,
+                createdAt: new Date().toISOString()
+            };
+            
+            allProducts = JSON.parse(localStorage.getItem('findo_products') || '[]');
+            allProducts.push(product);
+            localStorage.setItem('findo_products', JSON.stringify(allProducts));
+            
+            showNotification('Product added successfully!');
+            closeModal('addProductModal');
+            e.target.reset();
+            selectedImages = [];
+            loadMyProducts();
+        }
+
+        // Contact Seller (Start Conversation)
+        function contactSeller(productId) {
+            if (!currentUser) {
+                showNotification('Please sign up first!');
+                showSignup();
+                return;
+            }
+            
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) return;
+            
+            // Track browsing history
+            const browsingHistory = JSON.parse(localStorage.getItem('findo_browsing_history') || '[]');
+            browsingHistory.push(product);
+            localStorage.setItem('findo_browsing_history', JSON.stringify(browsingHistory));
+            
+            // Store product for messaging
+            localStorage.setItem('findo_current_product', JSON.stringify(product));
+            
+            // Show contact modal
+            document.getElementById('contactProductName').textContent = product.name;
+            document.getElementById('contactProductPrice').textContent = `$${(product.salePrice || product.price).toFixed(2)}`;
+            document.getElementById('contactStoreName').textContent = product.storeName;
+            document.getElementById('contactModal').classList.add('active');
+        }
+
+        async function sendMessage(e) {
+            e.preventDefault();
+            const message = e.target.querySelector('textarea').value;
+            const product = JSON.parse(localStorage.getItem('findo_current_product'));
+            
+            const messageObj = {
+                id: Date.now().toString(),
+                productId: product.id,
+                productName: product.name,
+                buyerId: currentUser.id,
+                buyerName: currentUser.name,
+                sellerId: product.storeId,
+                sellerName: product.storeName,
+                message: message,
+                timestamp: new Date().toISOString(),
+                read: false,
+                status: 'pending'
+            };
+            
+            const messages = JSON.parse(localStorage.getItem('findo_messages') || '[]');
+            messages.push(messageObj);
+            localStorage.setItem('findo_messages', JSON.stringify(messages));
+            
+            showNotification('Message sent to seller!');
+            closeModal('contactModal');
+            e.target.reset();
+        }
+
+        // Open Conversation
+        let currentConversation = null;
+        
+        function openConversation(otherId) {
+            currentConversation = otherId;
+            
+            const messages = JSON.parse(localStorage.getItem('findo_messages') || '[]');
+            const conversation = messages.filter(m => 
+                (m.sellerId === currentUser.id && m.buyerId === otherId) ||
+                (m.buyerId === currentUser.id && m.sellerId === otherId)
+            );
+            
+            if (conversation.length === 0) return;
+            
+            // Mark as read
+            messages.forEach(m => {
+                if (m.sellerId === currentUser.id && m.buyerId === otherId && !m.read) {
+                    m.read = true;
+                }
+            });
+            localStorage.setItem('findo_messages', JSON.stringify(messages));
+            checkUnreadMessages();
+            
+            const otherPerson = conversation[0].buyerId === currentUser.id ? 
+                conversation[0].sellerName : conversation[0].buyerName;
+            const product = conversation[0].productName;
+            
+            const chatWindow = document.getElementById('chatWindow');
+            chatWindow.innerHTML = `
+                <div class="chat-header">
+                    <h3>${otherPerson}</h3>
+                    <div style="color: var(--text-muted); font-size: 0.9rem;">About: ${product}</div>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    ${conversation.map(msg => `
+                        <div class="message ${msg.buyerId === currentUser.id ? 'sent' : 'received'}">
+                            <div>${msg.message}</div>
+                            <div style="font-size: 0.75rem; opacity: 0.7; margin-top: 0.5rem;">
+                                ${new Date(msg.timestamp).toLocaleTimeString()}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" class="chat-input" id="replyInput" placeholder="Type a message...">
+                    <button class="btn-primary" onclick="sendReply()">Send</button>
+                </div>
+                ${conversation[0].sellerId === currentUser.id && conversation[0].status !== 'sold' ? `
+                    <button class="btn-sold" onclick="markAsSold('${conversation[0].productId}')">
+                        ✓ MARK AS SOLD
+                    </button>
+                ` : ''}
+            `;
+            
+            // Scroll to bottom
+            setTimeout(() => {
+                const messagesDiv = document.getElementById('chatMessages');
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            }, 100);
+        }
+
+        function sendReply() {
+            const input = document.getElementById('replyInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            const messages = JSON.parse(localStorage.getItem('findo_messages') || '[]');
+            const lastMsg = messages.find(m => 
+                (m.sellerId === currentUser.id && m.buyerId === currentConversation) ||
+                (m.buyerId === currentUser.id && m.sellerId === currentConversation)
+            );
+            
+            if (!lastMsg) return;
+            
+            const newMessage = {
+                id: Date.now().toString(),
+                productId: lastMsg.productId,
+                productName: lastMsg.productName,
+                buyerId: lastMsg.sellerId === currentUser.id ? lastMsg.buyerId : currentUser.id,
+                buyerName: lastMsg.sellerId === currentUser.id ? lastMsg.buyerName : currentUser.name,
+                sellerId: lastMsg.sellerId === currentUser.id ? currentUser.id : lastMsg.sellerId,
+                sellerName: lastMsg.sellerId === currentUser.id ? currentUser.name : lastMsg.sellerName,
+                message: message,
+                timestamp: new Date().toISOString(),
+                read: false,
+                status: lastMsg.status
+            };
+            
+            messages.push(newMessage);
+            localStorage.setItem('findo_messages', JSON.stringify(messages));
+            
+            input.value = '';
+            openConversation(currentConversation);
+        }
+
+        // Mark as Sold
+        function markAsSold(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) {
+                showNotification('Product not found', 'error');
+                return;
+            }
+            
+            if (product.stock <= 0) {
+                showNotification('This product is out of stock!', 'error');
+                return;
+            }
+            
+            const quantity = parseInt(prompt(`How many units did you sell? (Available: ${product.stock})`, '1'));
+            
+            if (!quantity || quantity < 1) {
+                showNotification('Cancelled or invalid quantity', 'error');
+                return;
+            }
+            
+            if (quantity > product.stock) {
+                showNotification(`You only have ${product.stock} in stock!`, 'error');
+                return;
+            }
+            
+            // Update product stock
+            const productIndex = allProducts.findIndex(p => p.id === productId);
+            allProducts[productIndex].stock -= quantity;
+            allProducts[productIndex].sales = (allProducts[productIndex].sales || 0) + quantity;
+            
+            if (allProducts[productIndex].stock <= 0) {
+                allProducts[productIndex].stock = 0;
+                allProducts[productIndex].soldOut = true;
+            }
+            
+            localStorage.setItem('findo_products', JSON.stringify(allProducts));
+            
+            // Create sale record
+            const sale = {
+                id: Date.now().toString(),
+                productId: productId,
+                buyerId: currentConversation,
+                sellerId: currentUser.id,
+                quantity: quantity,
+                timestamp: new Date().toISOString(),
+                reviewSubmitted: false
+            };
+            
+            const sales = JSON.parse(localStorage.getItem('findo_sales') || '[]');
+            sales.push(sale);
+            localStorage.setItem('findo_sales', JSON.stringify(sales));
+            
+            // Update message status
+            const messages = JSON.parse(localStorage.getItem('findo_messages') || '[]');
+            messages.forEach(m => {
+                if (m.productId === productId && m.sellerId === currentUser.id && m.buyerId === currentConversation) {
+                    m.status = 'sold';
+                }
+            });
+            localStorage.setItem('findo_messages', JSON.stringify(messages));
+            
+            showNotification(`✓ Sold ${quantity} unit(s)! Stock updated to ${allProducts[productIndex].stock}.`);
+            
+            // Trigger review request for buyer
+            setTimeout(() => {
+                triggerReviewRequest(productId, currentConversation);
+            }, 1000);
+            
+            // Check achievements
+            checkAndUnlockAchievements();
+            
+            // Reload conversation
+            if (currentConversation) {
+                openConversation(currentConversation);
+            }
+        }
+
+        // Review System
+        function triggerReviewRequest(productId, buyerId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) return;
+            
+            // Store for review modal
+            localStorage.setItem('findo_pending_review', JSON.stringify({
+                productId: productId,
+                storeId: product.storeId,
+                storeName: product.storeName,
+                buyerId: buyerId,
+                timestamp: new Date().toISOString()
+            }));
+            
+            // Show notification to buyer (in real app, would be push notification)
+            console.log(`Review request sent to buyer ${buyerId} for product ${productId}`);
+        }
+
+        function showReviewForm() {
+            const pendingReview = JSON.parse(localStorage.getItem('findo_pending_review'));
+            if (!pendingReview) {
+                showNotification('No pending reviews');
+                return;
+            }
+            
+            document.getElementById('reviewStoreName').textContent = pendingReview.storeName;
+            document.getElementById('reviewModal').classList.add('active');
+        }
+
+        function submitReview(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const pendingReview = JSON.parse(localStorage.getItem('findo_pending_review'));
+            
+            const scores = {
+                productMatch: parseInt(formData.get('productMatch')),
+                quality: parseInt(formData.get('quality')),
+                communication: parseInt(formData.get('communication')),
+                shipping: parseInt(formData.get('shipping')),
+                packaging: parseInt(formData.get('packaging')),
+                honesty: parseInt(formData.get('honesty'))
+            };
+            
+            const totalScore = Object.values(scores).reduce((a, b) => a + b, 0);
+            const avgScore = (totalScore / 6).toFixed(1);
+            
+            const review = {
+                id: Date.now().toString(),
+                storeId: pendingReview.storeId,
+                storeName: pendingReview.storeName,
+                productId: pendingReview.productId,
+                buyerId: currentUser.id,
+                buyerName: currentUser.name,
+                scores: scores,
+                totalScore: totalScore,
+                avgScore: avgScore,
+                buyAgain: formData.get('buyAgain') === 'yes',
+                recommend: formData.get('recommend') === 'yes',
+                comments: formData.get('comments'),
+                timestamp: new Date().toISOString()
+            };
+            
+            const reviews = JSON.parse(localStorage.getItem('findo_reviews') || '[]');
+            reviews.push(review);
+            localStorage.setItem('findo_reviews', JSON.stringify(reviews));
+            
+            // Award points to reviewer
+            currentUser.score = (currentUser.score || 0) + 5;
+            localStorage.setItem('findo_user', JSON.stringify(currentUser));
+            
+            localStorage.removeItem('findo_pending_review');
+            
+            showNotification('Thank you for your review! +5 points');
+            closeModal('reviewModal');
+            e.target.reset();
+        }
+
+        // View Product
+        function viewProduct(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) return;
+            
+            // Store for later use
+            localStorage.setItem('findo_current_product_id', productId);
+            
+            // Increment views
+            product.views = (product.views || 0) + 1;
+            localStorage.setItem('findo_products', JSON.stringify(allProducts));
+            
+            // Track browsing
+            const browsingHistory = JSON.parse(localStorage.getItem('findo_browsing_history') || '[]');
+            browsingHistory.push(product);
+            localStorage.setItem('findo_browsing_history', JSON.stringify(browsingHistory));
+            
+            // Show product details modal
+            document.getElementById('productDetailName').textContent = product.name;
+            document.getElementById('productDetailPrice').textContent = `$${(product.salePrice || product.price).toFixed(2)}`;
+            document.getElementById('productDetailDescription').textContent = product.description;
+            document.getElementById('productDetailStock').textContent = `${product.stock} in stock`;
+            document.getElementById('productDetailStore').textContent = product.storeName;
+            document.getElementById('productDetailStore').onclick = () => {
+                closeModal('productDetailModal');
+                viewStore(product.storeId);
+            };
+            
+            const imagesHtml = product.images && product.images.length > 0 ?
+                product.images.map(img => `<img src="${img}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 0.5rem;">`).join('') :
+                '<div style="width: 100%; height: 200px; background: var(--bg); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 4rem;">📦</div>';
+            
+            document.getElementById('productDetailImages').innerHTML = imagesHtml;
+            
+            document.getElementById('productDetailModal').classList.add('active');
+        }
+
+        // View Store
+        function viewStore(storeId) {
+            const storeProducts = allProducts.filter(p => p.storeId === storeId);
+            if (storeProducts.length === 0) return;
+            
+            const storeName = storeProducts[0].storeName;
+            const totalSales = storeProducts.reduce((sum, p) => sum + (p.sales || 0), 0);
+            const reviews = JSON.parse(localStorage.getItem('findo_reviews') || '[]');
+            const storeReviews = reviews.filter(r => r.storeId === storeId);
+            const avgRating = storeReviews.length > 0 ?
+                (storeReviews.reduce((sum, r) => sum + parseFloat(r.avgScore), 0) / storeReviews.length).toFixed(1) :
+                '5.0';
+            
+            // Determine badge
+            let badge = 'NEW';
+            let badgeClass = 'badge-bronze';
+            if (totalSales > 100) {
+                badge = 'PLATINUM';
+                badgeClass = 'badge-platinum';
+            } else if (totalSales > 50) {
+                badge = 'GOLD';
+                badgeClass = 'badge-gold';
+            } else if (totalSales > 10) {
+                badge = 'SILVER';
+                badgeClass = 'badge-silver';
+            }
+            
+            document.getElementById('storeProfileName').textContent = storeName;
+            document.getElementById('storeProfileBadge').textContent = badge;
+            document.getElementById('storeProfileBadge').className = `seller-badge ${badgeClass}`;
+            document.getElementById('storeProfileProducts').textContent = storeProducts.length;
+            document.getElementById('storeProfileSales').textContent = totalSales;
+            document.getElementById('storeProfileRating').textContent = avgRating;
+            
+            displayProducts(storeProducts, 'storeProductsGrid');
+            
+            document.getElementById('storeProfileModal').classList.add('active');
+        }
+
+        // Initialize app
+        init();
+    </script>
+</body>
+</html>
